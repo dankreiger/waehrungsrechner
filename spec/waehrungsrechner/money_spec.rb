@@ -1,5 +1,4 @@
 require "spec_helper"
-require "waehrungsrechner"
 
 describe Money do
   let(:amount)   { 50 }
