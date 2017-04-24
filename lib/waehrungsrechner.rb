@@ -1,5 +1,5 @@
 require "waehrungsrechner/version"
+require "waehrungsrechner/money"
 
 module Waehrungsrechner
-  # Your code goes here...
 end

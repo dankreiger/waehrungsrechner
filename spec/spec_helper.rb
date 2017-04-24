@@ -1,5 +1,7 @@
 require "bundler/setup"
+require "pry"
 require "waehrungsrechner"
+require "httparty"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
