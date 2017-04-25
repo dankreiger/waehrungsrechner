@@ -21,7 +21,7 @@ class Money
 
   def convert_to transfer_currency
     raise ArgumentError, "`#{transfer_currency}` must be a 3 character string" unless transfer_currency.is_a?(String) && transfer_currency.length == 3
-    raise ArgumentError, "`#{transfer_currency}` is either an invalid currency symbol, or it is not currently supported (list of supported currencies: #{@rate_info['rates'] << @rate_info['base']})." unless (rates = @rate_info['rates']) && rates.keys.include?(transfer_currency)
+    raise ArgumentError, "`#{transfer_currency}` is either an invalid currency symbol, or it is not currently supported." unless (rates = @rate_info['rates']) && rates.keys.include?(transfer_currency)
 
     amount * rates[transfer_currency]
   end
