@@ -1,3 +1,5 @@
+require 'httparty'
+
 class Money
   attr_reader :amount, :base_currency, :rates
 
