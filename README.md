@@ -1,4 +1,4 @@
-# Waehrungsrechner
+# Waehrungsrechner [![Build Status](https://travis-ci.org/dankreiger/waehrungsrechner.svg?branch=master)](https://travis-ci.org/dankreiger/waehrungsrechner)
 
 Calculate currency conversions using up-to-date exchange rates.
 
