@@ -6,9 +6,9 @@ class Money
     begin
       @rate_info = HTTParty.get "http://api.fixer.io/latest?base=#{base_currency}"
       raise ArgumentError, "`#{base_currency}` is an invalid currency symbol." if @rate_info.include? 'error'
-    rescue SocketError => se
+    rescue Exception => e
       puts "Something went wrong. Please make sure are connected to the internet."
-      puts se.inspect
+      puts e.inspect
     end
 
     @amount = amount
