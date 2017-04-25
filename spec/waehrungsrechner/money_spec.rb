@@ -23,16 +23,20 @@ describe Money do
     expect(money_euro.inspect).to eq('50.00 EUR')
   end
 
-  it "converts the given amount and currency to a newly inputted currency" do
+  it "converts the given amount and currency to a newly inputted currency and returns the appropriate money object" do
     expect(money_euro.convert_to('USD').inspect).to eq Money.new(50 * rates['USD'], 'USD').inspect
+    expect(money_euro.convert_to('USD').amount).to eq Money.new(50 * rates['USD'], 'USD').amount
+    expect(money_euro.convert_to('USD').base_currency).to eq Money.new(50 * rates['USD'], 'USD').base_currency
   end
 
   it "adds two money objects together" do
-    expect(money_euro + money_euro2).to eq (money_euro.amount + money_euro2.amount), 'EUR'
-    $stdin = StringIO.new("1")
-    expect(money_euro + money_usd).to eq (money_euro.amount + money_usd.convert_to('EUR').amount)
-    $stdin = StringIO.new("2")
-    expect(money_euro + money_usd).to eq (money_euro.convert_to('USD').amount + money_usd.amount)
+    expect((money_euro + money_euro2).inspect).to eq Money.new(110, 'EUR').inspect
+    # show addition in EUR
+    $stdin = StringIO.new("EUR")
+    expect((money_euro + money_usd).inspect).to eq Money.new((money_euro.amount + money_usd.convert_to('EUR').amount), 'EUR').inspect
+    # show addition in USD
+    $stdin = StringIO.new("USD")
+    expect((money_euro + money_usd).inspect).to eq Money.new((money_euro.convert_to('USD').amount + money_usd.amount), 'USD').inspect
   end
 
 

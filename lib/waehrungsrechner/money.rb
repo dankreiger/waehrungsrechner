@@ -25,8 +25,11 @@ class Money
   def convert_to transfer_currency
     raise ArgumentError, "`#{transfer_currency}` must be a 3 character string" unless transfer_currency.is_a?(String) && transfer_currency.length == 3
     raise ArgumentError, "`#{transfer_currency}` is either an invalid currency symbol, or it is not currently supported." unless (rates = @rate_info['rates']) && rates.keys.include?(transfer_currency)
-
     Money.new(amount * rates[transfer_currency], transfer_currency)
+  end
+
+  def conversion_amount transfer_currency
+    convert_to(transfer_currency).amount
   end
 
   # adding money objects together
@@ -40,10 +43,10 @@ class Money
       case answer.upcase
       # calculate the total in the base currency
       when '1', "#{base_currency}"
-        Money.new(amount + other.convert_to(base_currency), base_currency)
+        Money.new(amount + other.conversion_amount(base_currency), base_currency)
         # calculate the total in the transfer currency
       when '2', "#{other.base_currency}"
-        Money.new(self.convert_to(other.base_currency) + other.amount, other.base_currency)
+        Money.new(self.conversion_amount(other.base_currency) + other.amount, other.base_currency)
       end
     end
   end
